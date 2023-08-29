@@ -1,0 +1,31 @@
+mat-horizontal-stepper {
+    margin-top: 8px;
+    height: max-content; 
+}
+  
+mat-form-field {
+  margin-top: 15px;
+  margin-right: 10px;
+}
+  
+
+mat-button-toggle-group {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+mat-slider {
+    margin-left: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 25%;
+}
+
+#checkout {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 20px;
+    height: 50px;
+    width: 100px;
+}

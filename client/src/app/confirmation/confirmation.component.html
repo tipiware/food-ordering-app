@@ -1,0 +1,24 @@
+<body>
+    <div class ="title">
+    <mat-divider style="margin: 8px;"></mat-divider>
+    </div>
+    <h3 style="text-align: center;">{{message}}</h3>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title><h1>Your Order</h1></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h4>
+        {{orderItems + "\n"}}
+        </h4>
+      </mat-card-content>
+      <h3 style="text-align: center;">
+      Total: {{price.toFixed(2)}} dollars. 
+      </h3>
+    </mat-card>
+
+    <div class="but"> 
+      <button mat-raised-button color="primary" [disabled]="clicked" mat-button (click)= "restart()" [routerLink] = "'/order'">Restart</button>
+      <button mat-raised-button color="primary" [disabled]="clicked" mat-button (click)= "confirm()">Confirm</button>
+    </div>
+    </body>

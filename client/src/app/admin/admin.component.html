@@ -1,0 +1,23 @@
+<h2>
+    Create Item
+</h2>
+
+<p>
+    To create a new item, fill out its name and price, then click the "create item" button.
+</p>
+
+<form [formGroup]="adminFormGroup" (ngSubmit)="submitForm()">
+    <mat-form-field>
+        <mat-label>Item Name</mat-label>
+        <input matInput formControlName="name" placeholder="The name of the menu item" required>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price" placeholder="Ex. $5.83" required>
+    </mat-form-field>
+
+    <div>
+        <button type="submit" mat-stroked-button>Create Item</button>
+    </div>
+</form>

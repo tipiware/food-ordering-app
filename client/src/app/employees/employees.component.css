@@ -1,0 +1,21 @@
+table, mat-paginator, div.search {
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: auto;
+}
+div.tableTitle, div.status {
+    text-align: center;
+    font-size: 1.5em;
+    margin: 25px;
+}
+div.search {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+td {
+    white-space: pre-line;
+    height: auto;
+}

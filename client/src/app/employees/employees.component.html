@@ -1,0 +1,77 @@
+
+<div class ="tableTitle">Orders
+</div>
+<div class = "search">
+  <mat-form-field style="text-align: center;">
+    <input matInput type="text" #searchInput placeholder="Search" (keyup)="searchOrders(searchInput.value)">
+  </mat-form-field>
+</div>
+
+<mat-divider style="margin: 8px;"></mat-divider>
+<table mat-table matSort [dataSource]="orderInfo">
+
+    <ng-container matColumnDef="orderId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Order ID </th>
+      <td mat-cell *matCellDef="let customer"> {{customer.orderId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="customerName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Customer Name (ID) </th>
+      <td mat-cell *matCellDef="let customer"> {{customer.customerName + " (" + customer.customerId + ")"}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+      <td mat-cell *matCellDef="let customer"> {{customer.address}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="phoneNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone # </th>
+      <td mat-cell *matCellDef="let customer"> {{customer.phoneNumber}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="foodName">
+      <th mat-header-cell *matHeaderCellDef> Food </th>
+      <td mat-cell *matCellDef="let customer"> {{customer.foodName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pickupDeliveryFlag">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Delivery/Pickup </th>
+      <td mat-cell *matCellDef="let customer"> {{customer.pickupDeliveryFlag}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Item Price </th>
+      <td mat-cell *matCellDef="let customer"> {{customer.price.toFixed(2)}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let customer"> {{customer.status}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let customer">
+        <button mat-raised-button color="primary" mat-button (click)="finishOrder(customer.orderId)">Finish</button>
+        
+        <button mat-raised-button color="warn" mat-button (click)="removeOrder(customer.orderId)">Remove</button>
+      </td>
+    </ng-container>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="10">
+        <p style="text-align: center;">
+          {{message}}
+        </p>
+      </td>
+    </tr>
+    <tr mat-header-row *matHeaderRowDef="orderColumns;"></tr>
+    <tr mat-row *matRowDef="let customer; columns: orderColumns;"></tr>
+
+</table>
+<mat-paginator #paginator [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [length] ="10"></mat-paginator>
+
+<div class = "status">
+<button mat-raised-button color="primary" mat-button (click)="buildTable('ACTIVE')">Active Orders</button>
+<button mat-raised-button color="primary" mat-button (click)="buildTable('FINISHED')">Finished Orders</button>
+</div>

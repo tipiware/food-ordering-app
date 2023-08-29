@@ -1,0 +1,10 @@
+div.buttons {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+mat-select {
+    color: white;
+    border: 1px solid white;
+}

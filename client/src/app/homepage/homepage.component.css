@@ -1,0 +1,50 @@
+/*About-us starts here*/
+.aboutus-section{
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-bottom: 50px;
+}
+.aboutus-section h2{
+    color:#472664; 
+    text-align: center;
+    margin-top: 25px;
+    font-size: 35px;
+}
+.aboutus-section p {
+    text-align: justify;
+    font-size: 20px;
+}
+/*About us ends here*/
+
+button {
+    margin: auto;
+    width: 10em;
+    height: 5em;
+}
+
+div {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+p {
+    width: 90%;
+    margin-top:20px;
+    font-size: 1.75em;
+    margin-bottom: 20px;
+}
+
+#buttonBox {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+button {
+    margin-left: 25px;
+}

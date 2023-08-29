@@ -1,0 +1,89 @@
+ <mat-card>
+   <mat-card-header>
+     <mat-card-title><h1>Food Order Form</h1></mat-card-title>
+   </mat-card-header>
+   <mat-card-content>
+     <h3>Select Food item</h3>
+     <mat-form-field appearance="fill">
+     <mat-select [(ngModel)]="foodItem" (selectionChange)="foodItemChange()">
+       <mat-option *ngFor="let food of foods" [value]="food">{{food.name}}</mat-option>
+     </mat-select>
+    </mat-form-field>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div [hidden]="foodItem.id!=0">
+    <h3>Select Food Size</h3>
+   <mat-radio-group [(ngModel)]="pizzaSize" (change)="pizzaSizeChange()" [disabled]="foodItem.id!=0">
+     <mat-grid-list cols="4" style="height: 100px; width: 200px; white-space: nowrap;" rowHeight="fit">
+      <mat-grid-tile colspan="3"><span class="lb">Small ($8.00)</span></mat-grid-tile>
+      <mat-grid-tile><mat-radio-button value="0" labelPosition="before"></mat-radio-button></mat-grid-tile>
+      <mat-grid-tile colspan="3"><span class="lb">Medium ($12.00)</span></mat-grid-tile>
+      <mat-grid-tile><mat-radio-button value="1" labelPosition="before"></mat-radio-button></mat-grid-tile>
+      <mat-grid-tile colspan="3"><span class="lb">Large ($16.00)</span></mat-grid-tile>
+      <mat-grid-tile><mat-radio-button value="2" labelPosition="before"></mat-radio-button></mat-grid-tile>
+      <mat-grid-tile colspan="3"><span class="lb">XX Large ($20.00)</span></mat-grid-tile>
+      <mat-grid-tile><mat-radio-button value="3" labelPosition="before"></mat-radio-button></mat-grid-tile>
+    </mat-grid-list>
+  </mat-radio-group>
+  <mat-divider [vertical]="true"></mat-divider>
+  <h2>Add more</h2>
+  <section>
+    <mat-checkbox [(ngModel)]="extra_cheese" [checked]="extra_cheese" [disabled]="pizzaSize==-1" (change)="extraCheeseChange()" labelPosition="before">Extra Cheese :</mat-checkbox>
+   </section>
+  <section>
+   <mat-checkbox [(ngModel)]="pepperoni" [checked]="pepperoni" (change)="pepperoniChange()" [disabled]="pizzaSize==-1" labelPosition="before">Pepperoni&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</mat-checkbox>
+   <mat-checkbox [(ngModel)]="extra_pepperoni" [checked]="extra_pepperoni" (change)="extraPepperoniChange()" [disabled]="!pepperoni" labelPosition="before">Extra</mat-checkbox>
+  </section>
+  <section>
+     <mat-checkbox [(ngModel)]="sausage" [checked]="sausage" (change)="sausageChange()" [disabled]="pizzaSize==-1" labelPosition="before">Sausage&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</mat-checkbox>
+     <mat-checkbox [(ngModel)]="extra_sausage" [checked]="extra_sausage" (change)="extraSausageChange()" [disabled]="!sausage" labelPosition="before">Extra</mat-checkbox>
+  </section>
+ <mat-divider [vertical]="true"></mat-divider>
+</div>
+<h2>Select Quantity</h2>
+<section>
+  <mat-form-field appearance="fill">
+  <mat-select [(ngModel)]="quantity" (selectionChange)="quantityChange()" [disabled]="pizzaSize==-1 && foodItem.id==0">
+    <mat-option [value]="1">1</mat-option>
+    <mat-option [value]="2">2</mat-option>
+    <mat-option [value]="3">3</mat-option>
+    <mat-option [value]="4">4</mat-option>
+    <mat-option [value]="5">5</mat-option>
+    <mat-option [value]="6">6</mat-option>
+    <mat-option [value]="7">7</mat-option>
+    <mat-option [value]="8">8</mat-option>
+    <mat-option [value]="9">9</mat-option>
+    <mat-option [value]="10">10</mat-option>
+  </mat-select>
+</mat-form-field>
+</section>
+ <mat-divider [vertical]="true"></mat-divider>
+<h2>Current Total: {{orderCost | currency}} {{costPerPizza != 0  && quantity > 1 ? "(Cost Per: "+(costPerPizza | currency)+")": '' }}</h2>
+ <button mat-raised-button color="primary" [disabled]="pizzaSize==-1 && foodItem.id==0" (click)="addToOrder()">Add to Order</button>
+ <button mat-raised-button color="primary" (click)="clearForm()">Clear</button>
+ <button mat-raised-button color="primary" (click)="checkout()" [disabled]="currentOrder.getOrderSize()==0">Proceed to Checkout</button>
+</mat-card-content>
+<mat-card-footer>
+  <mat-accordion>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h1>Total Price</h1>
+      </mat-panel-title>
+      <mat-panel-description>
+        <h1>{{orderTotal | currency}}</h1>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-list>
+      <mat-list-item style="height: auto;" *ngFor="let item of currentOrder.getOrderItems(); index as i">
+        <mat-list>
+          Item {{i+1}}:
+          <mat-list-item style="height: auto;" *ngFor="let topping of splitOrderString(item)">
+            {{topping}}
+          </mat-list-item>
+        </mat-list>
+      </mat-list-item>
+    </mat-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-card-footer>
+</mat-card>

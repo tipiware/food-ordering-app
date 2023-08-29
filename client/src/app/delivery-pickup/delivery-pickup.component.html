@@ -1,0 +1,134 @@
+<mat-horizontal-stepper linear #stepper>
+
+    <mat-step [stepControl]="nameForm">
+        <ng-template matStepLabel>Select Pickup or Delivery</ng-template>
+        
+        <form [formGroup]="nameForm" (ngSubmit)="typeSubmit()">
+            <mat-form-field>
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName" placeholder="Tom" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName" placeholder="Hanks" required>
+            </mat-form-field>
+
+            <br>
+
+            <mat-button-toggle-group aria-label="Preferred delivery method" formControlName="retType">
+                <mat-button-toggle value="pickup">Pickup</mat-button-toggle>
+                <mat-button-toggle value="delivery">Delivery</mat-button-toggle>
+            </mat-button-toggle-group>
+
+            <div>
+                <button type="submit" mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+        
+    </mat-step>
+  
+  
+    <mat-step *ngIf="delivery" label="Enter Delivery Information" [stepControl]="secondFormGroup">
+
+        <form [formGroup]="secondFormGroup" (ngSubmit)="addrSubmit(stepper)">
+            <mat-form-field>
+                <mat-label>Address</mat-label>
+                <input matInput formControlName="address" placeholder="Ex. 1 Main St, New York, NY" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>ZIP code</mat-label>
+                <input matInput formControlName="zip" placeholder="Your 5-digit ZIP code" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>State</mat-label>
+                <input matInput formControlName="state" placeholder="Ex. OH" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Phone Number</mat-label>
+                <input matInput formControlName="phone" placeholder="Ex. 123-456-7890" required>
+            </mat-form-field>
+
+            <br>
+
+            <mat-label for="deliverySlider">
+                Your pizza will be delivered at {{deliveryTime}}.
+            </mat-label>
+
+            <mat-slider
+                (change)="deliverySlider($event.value)"
+                name="deliverySlider"
+                thumbLabel
+                [displayWith]="formatLabel"
+                step="5"
+                tickInterval="1"
+                min="25"
+                max="60">
+            </mat-slider>
+
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button type="submit" mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    
+    <mat-step *ngIf="!delivery" label="Enter Pickup Information">
+        <label for="pickupSlider">
+            Your pizza will be ready for pickup at {{deliveryTime}}.
+        </label>
+
+        <mat-slider
+            (change)="pickupSlider($event.value)"
+            name="pickupSlider"
+            thumbLabel
+            [displayWith]="formatLabel"
+            step="5"
+            tickInterval="1"
+            min="25"
+            max="60">
+        </mat-slider>
+        
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button (click)="pickupSubmit()" mat-button matStepperNext>Next</button>
+        </div>
+    </mat-step>
+  
+    <mat-step>
+        <ng-template matStepLabel>Order</ng-template>
+        <p>Done! Click the button to proceed to checkout.</p>
+
+        <button id="checkout" mat-raised-button color="accent" (click)="checkout()" [routerLink] = "'/confirmation'">Checkout</button>
+
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Start Over</button>
+        </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+  <mat-accordion>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h1>Order Total Price (click to see details)</h1>
+      </mat-panel-title>
+      <mat-panel-description>
+        <h1>{{orderTotal | currency}}</h1>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-list>
+      <mat-list-item style="height: auto;" *ngFor="let item of currentOrder.getOrderItems(); index as i">
+        <mat-list>
+          Item {{i+1}}:
+          <mat-list-item style="height: auto;" *ngFor="let topping of splitOrderString(item)">
+            {{topping}}
+          </mat-list-item>
+        </mat-list>
+      </mat-list-item>
+    </mat-list>
+    </mat-expansion-panel>
+  </mat-accordion>

@@ -1,0 +1,51 @@
+<h4>Order Item {{orderNumber}}</h4>
+<pre *ngIf="itemNumber + 5 <= data.id.length">
+Modifying
+ {{splitOrderString(data.id)}}
+</pre>
+<pre *ngIf="itemNumber + 5 > data.id.length">
+  Adding new item
+</pre>
+
+<h5>Size</h5>
+  <mat-select [(ngModel)]="size">
+      <mat-option [value]="small">Small</mat-option>
+      <mat-option [value]="medium">Medium</mat-option>
+      <mat-option [value]="large">Large</mat-option>
+      <mat-option [value]="extra_large">Extra Large</mat-option>
+  </mat-select >
+
+  
+<h5>Toppings</h5>
+  <pre>
+  <mat-checkbox [(ngModel)]="pepperoni" [checked]="true">Pepperoni</mat-checkbox>
+  <mat-checkbox [(ngModel)]="sausage" [checked]="true">Sausage</mat-checkbox>
+  <mat-checkbox [(ngModel)]="bacon" [checked]="true">Bacon</mat-checkbox>
+  </pre>
+<h5>Extra Toppings</h5>
+  <pre>
+  <mat-checkbox [(ngModel)]="extra_cheese"[checked]="true">Extra Cheese </mat-checkbox>
+  <mat-checkbox [(ngModel)]="extra_pepperoni" [checked]="true">Extra Pepperoni</mat-checkbox>
+  <mat-checkbox [(ngModel)]="extra_sausage" [checked]="true">Extra Sausage</mat-checkbox>
+  <mat-checkbox [(ngModel)]="extra_bacon" [checked]="true">Extra Bacon</mat-checkbox>
+  </pre>
+<h5>
+<h4 *ngIf="size != ''">Change to {{orderText()}}?</h4>
+</h5>
+<div class="buttons">
+<div *ngIf="size != ''">
+    <button button mat-raised-button color="primary" style="margin: 2px" (click)="save(data.id)">SAVE</button>
+</div>
+<div *ngIf="size == ''">
+    <button button mat-raised-button color="warn" style="margin: 2px" [disabled]=true>SAVE</button>
+</div>
+
+<button button mat-raised-button color="warn" style="margin: 2px" (click)="abort()">ABORT</button>
+<button button mat-raised-button color="primary" style="margin: 2px" (click)="undo()">UNDO</button>
+<div *ngIf="itemNumber + 5 < data.id.length">
+    <button button mat-raised-button color="primary" style="margin: 2px" (click)="next(data.id)">NEXT</button>
+</div>
+<div *ngIf="itemNumber + 5 >= data.id.length">
+    <button button mat-raised-button color="primary" style="margin: 2px" (click)="next(data.id)">NEW</button>
+</div>
+</div>

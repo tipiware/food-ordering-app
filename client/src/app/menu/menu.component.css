@@ -1,0 +1,16 @@
+mat-card {
+    max-width: 800px;
+    margin: 25px auto;
+}
+.name {
+    width: 10%;
+}
+.price {
+     width: 10%;
+}
+
+div.tableTitle {
+    text-align: center;
+    font-size: 1.5em;
+    margin: 25px;
+}

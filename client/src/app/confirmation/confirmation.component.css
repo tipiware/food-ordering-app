@@ -1,0 +1,29 @@
+div.title {
+    text-align: center;
+    font-size: 1.5em;
+    margin: 25px;
+}
+table {
+    margin-right: auto;
+    margin-left: auto;
+    padding: auto;
+    width: 35%;
+}
+mat-form-field {
+    margin: 10px;
+    width: 20%;
+}
+div.but, mat-card-content, mat-card-header {
+    margin: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 5px;
+}
+mat-card {
+    white-space: pre-line;
+    height: auto;
+    width: 30%;
+    margin: 25px auto;
+}

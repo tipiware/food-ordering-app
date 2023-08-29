@@ -1,0 +1,28 @@
+.footer-spacer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: auto;
+}
+
+mat-list {
+    margin: 10px;
+}
+
+mat-list-item {
+    font-size: 0.5em;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h3 {   
+    font-size: 0.8em;
+    margin-right: 10px;
+}
